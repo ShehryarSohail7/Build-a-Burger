@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Navbar from "../components/navbar";
 import top_bun from "../images/top_bun.png";
 import bottom_bun from "../images/bottom_bun.png";
 import salad_image from "../images/salad.png";
@@ -7,7 +6,7 @@ import chicken_image from "../images/chicken.png";
 import cheese_image from "../images/cheese.png";
 import meat_image from "../images/meat.png";
 
-const Home_page = () => {
+const Home_page = (props) => {
   // state variables
   const [Salad, Set_Salad] = useState(0);
   const [Saladarr, Set_Saladarr] = useState([]);
@@ -208,11 +207,65 @@ const Home_page = () => {
     }
   };
 
+  // Order Button
+
+  function OrderButtonManipulation(props) {
+    if (props.type === "order") {
+      if (
+        disable_button_Chicken === true &&
+        disable_button_Cheese === true &&
+        disable_button_Salad === true &&
+        disable_button_Meat === true
+      ) {
+        return (
+          <button
+            className="px-4 py-3 my-2"
+            style={{
+              backgroundColor: "#c7c6c6",
+              border: "1px solid #ccc",
+              color: "#888",
+            }}
+            disabled={false}
+          >
+            Order Now
+          </button>
+        );
+      } else {
+        return (
+          <button
+            className="px-4 py-3 my-2"
+            style={{
+              backgroundColor: "#dad735",
+              border: "1px solid #966909",
+              color: "#966909",
+            }}
+            disabled={false}
+          >
+            Order Now
+          </button>
+        );
+      }
+    } else if (props.type === "signIn") {
+      return (
+        <button
+          className="px-4 py-3 my-2"
+          style={{
+            backgroundColor: "#c7c6c6",
+            border: "1px solid #ccc",
+            color: "#888",
+          }}
+          disabled={false}
+        >
+          Sign in to order
+        </button>
+      );
+    }
+  }
+
   // return HTML
 
   return (
     <div>
-      <Navbar />
       <div className="d-flex justify-content-center">
         <div
           className=" col-4 d-flex flex-column align-items-center mt-3"
@@ -361,28 +414,9 @@ const Home_page = () => {
             </button>
           </div>
         </div>
-        <button
-          className="px-4 py-3 my-2"
-          style={
-            disable_button_Chicken === true &&
-            disable_button_Cheese === true &&
-            disable_button_Salad === true &&
-            disable_button_Meat === true
-              ? {
-                  backgroundColor: "#c7c6c6",
-                  border: "1px solid #ccc",
-                  color: "#888",
-                }
-              : {
-                  backgroundColor: "#dad735",
-                  border: "1px solid #966909",
-                  color: "#966909",
-                }
-          }
-          disabled={false}
-        >
-          Order Now
-        </button>
+        <OrderButtonManipulation
+          type={props.activeUser === null ? "signIn" : "order"}
+        />
       </div>
     </div>
   );
