@@ -12,6 +12,11 @@ function App() {
     Set_aciveUser(user);
   };
 
+  // let active = localStorage.getItem("active"); //to stay signed in
+  // if (active.salad !== null) {
+  //   Set_aciveUser(active);
+  // }
+
   return (
     <div>
       <Navbar activeUser={activeUser} userSetter={Active_User_Setter} />

@@ -5,6 +5,7 @@ import salad_image from "../images/salad.png";
 import chicken_image from "../images/chicken.png";
 import cheese_image from "../images/cheese.png";
 import meat_image from "../images/meat.png";
+import Popup from "../components/popup";
 
 const Home_page = (props) => {
   // state variables
@@ -20,8 +21,28 @@ const Home_page = (props) => {
   const [disable_button_Chicken, Set_disable_button_Chicken] = useState(true);
   const [disable_button_Cheese, Set_disable_button_Cheese] = useState(true);
   const [disable_button_Meat, Set_disable_button_Meat] = useState(true);
+  const [popup, Set_popup] = useState(false);
+
+  // Setters
+  const Set_popup_value = (value) => {
+    Set_popup(value);
+  };
 
   // function
+
+  const save_order = () => {
+    if (localStorage.getItem(props.activeUser) === null) {
+      localStorage.setItem(props.activeUser, JSON.stringify([]));
+    }
+    let orders = JSON.parse(localStorage.getItem(props.activeUser));
+    orders.push({
+      Salad: Salad,
+      Chicken: Chicken,
+      Cheese: Cheese,
+      Meat: Meat,
+    });
+    localStorage.setItem(props.activeUser, JSON.stringify(orders));
+  };
 
   // Salad
   const Salad_More = () => {
@@ -225,7 +246,7 @@ const Home_page = (props) => {
               border: "1px solid #ccc",
               color: "#888",
             }}
-            disabled={false}
+            disabled={true}
           >
             Order Now
           </button>
@@ -240,6 +261,7 @@ const Home_page = (props) => {
               color: "#966909",
             }}
             disabled={false}
+            onClick={() => Set_popup(true)}
           >
             Order Now
           </button>
@@ -254,7 +276,7 @@ const Home_page = (props) => {
             border: "1px solid #ccc",
             color: "#888",
           }}
-          disabled={false}
+          disabled={true}
         >
           Sign in to order
         </button>
@@ -418,6 +440,32 @@ const Home_page = (props) => {
           type={props.activeUser === null ? "signIn" : "order"}
         />
       </div>
+      <Popup
+        trigger={popup}
+        Set_popup_value={Set_popup_value}
+        save_order={save_order}
+      >
+        <div className="pt-3" style={{ fontFamily: "Open Sans, sans-serif" }}>
+          <p
+            style={{
+              fontSize: "15px",
+            }}
+          >
+            <b>Order Summary</b>
+          </p>
+          <div style={{ fontSize: "13px" }}>
+            <p>A delicious burger with the following ingredients:</p>
+            <ul>
+              <li>Salad: {Salad}</li>
+              <li>Chicken: {Chicken}</li>
+              <li>Cheese: {Cheese}</li>
+              <li>Meat: {Meat}</li>
+            </ul>
+            <p>$ {(4.0 + Salad + Chicken + Cheese + Meat).toFixed(2)}</p>
+            <p>Continue to checkout?</p>
+          </div>
+        </div>
+      </Popup>
     </div>
   );
 };
