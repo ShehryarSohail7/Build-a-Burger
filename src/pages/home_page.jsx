@@ -456,10 +456,10 @@ const Home_page = (props) => {
           <div style={{ fontSize: "13px" }}>
             <p>A delicious burger with the following ingredients:</p>
             <ul>
-              <li>Salad: {Salad}</li>
-              <li>Chicken: {Chicken}</li>
-              <li>Cheese: {Cheese}</li>
-              <li>Meat: {Meat}</li>
+              <li>Salad: {Math.round((Salad / 0.5) * 100) / 100}</li>
+              <li>Chicken: {Math.round((Chicken / 0.7) * 100) / 100}</li>
+              <li>Cheese: {Math.round((Cheese / 0.4) * 100) / 100}</li>
+              <li>Meat: {Math.round((Meat / 1.3) * 100) / 100}</li>
             </ul>
             <p>$ {(4.0 + Salad + Chicken + Cheese + Meat).toFixed(2)}</p>
             <p>Continue to checkout?</p>

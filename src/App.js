@@ -26,7 +26,7 @@ function App() {
           path="/login"
           element={<LoginSignUp userSetter={Active_User_Setter} />}
         />
-        <Route path="/orders" element={<Orders />} />
+        <Route path="/orders" element={<Orders activeUser={activeUser} />} />
       </Routes>
     </div>
   );
