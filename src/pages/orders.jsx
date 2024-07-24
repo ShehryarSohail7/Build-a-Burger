@@ -23,21 +23,23 @@ const Orders = (props) => {
       let meat2;
       let chicken2;
       let cheese2;
+      console.log("user items are:", user_items);
       let ordersArray = [];
 
       for (let i = 0; i < user_items.length; i++) {
-        salad = user_items[i].Salad;
-        meat = user_items[i].Meat;
-        chicken = user_items[i].Chicken;
-        cheese = user_items[i].Cheese;
+        console.log("user items are:", user_items[i]);
+        salad = user_items[i].salad;
+        meat = user_items[i].meat;
+        chicken = user_items[i].chicken;
+        cheese = user_items[i].cheese;
 
-        salad2 = user_items[i].Salad / 0.5;
+        salad2 = user_items[i].salad / 0.5;
         salad2 = Math.round(salad2 * 100) / 100;
-        meat2 = user_items[i].Meat / 1.3;
+        meat2 = user_items[i].meat / 1.3;
         meat2 = Math.round(meat2 * 100) / 100;
-        chicken2 = user_items[i].Chicken / 0.7;
+        chicken2 = user_items[i].chicken / 0.7;
         chicken2 = Math.round(chicken2 * 100) / 100;
-        cheese2 = user_items[i].Cheese / 0.4;
+        cheese2 = user_items[i].cheese / 0.4;
         cheese2 = Math.round(cheese2 * 100) / 100;
 
         ordersArray.push(

@@ -1,5 +1,5 @@
 import React from "react";
-import "./popup.css";
+import "./css/popup.css";
 
 const Popup = (props) => {
   console.log("popup tiggered");
@@ -14,7 +14,7 @@ const Popup = (props) => {
             color: "#944317",
           }}
           onClick={() => {
-            props.Set_popup_value(false);
+            props.setPopUp(false);
           }}
         >
           <b>CANCEL</b>
@@ -26,8 +26,8 @@ const Popup = (props) => {
             color: "#5c9210",
           }}
           onClick={() => {
-            props.Set_popup_value(false);
-            props.save_order();
+            props.setPopUp(false);
+            props.saveorder();
           }}
         >
           <b>CONTINUE</b>

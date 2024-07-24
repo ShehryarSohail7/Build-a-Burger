@@ -1,0 +1,17 @@
+.disable-button {
+  background-color: #ac9980;
+  color: #ccc;
+  border: 1px solid #7e7365;
+}
+
+.enable-button {
+  background-color: #d39952;
+  color: #fff;
+  border: 1px solid #aa6817;
+}
+
+.add-button {
+  background-color: #8f5e1e;
+  color: #fff;
+  border: 1px solid #8f5e1e;
+}
