@@ -43,32 +43,55 @@ const Homepage = (props) => {
     localStorage.setItem(props.activeUser, JSON.stringify(orders));
   };
 
-  // salad
-  const handleAddSalad = () => {
-    console.log("salad More Triggered");
-    let increment = salad + 0.5;
+  // handlers
+
+  const handleAdd = (item, itemState, setItem, helperItem) => {
+    console.log(`${item} More Triggered`);
+    let temp;
+    if (item === "salad") {
+      temp = 0.5;
+    } else if (item === "chicken") {
+      temp = 0.7;
+    } else if (item === "cheese") {
+      temp = 0.4;
+    } else if (item === "meat") {
+      temp = 1.3;
+    }
+
+    let increment = itemState + temp;
     increment = Math.round(increment * 100) / 100;
-    setSalad(increment);
-    helperSaladPiece("add");
-    disableButtonHandler(disableButton, setDisableButton, "salad", "enable");
+    setItem(increment);
+    helperItem("add");
+    disableButtonHandler(disableButton, setDisableButton, item, "enable");
   };
 
-  const handleRemoveSalad = () => {
-    console.log("salad Less Triggered");
+  const handleRemove = (item, itemState, setItem, helperItem) => {
+    console.log(`${item} Less Triggered`);
 
-    if (salad === 0) {
+    if (item === 0) {
       return;
     }
-    let decrement = salad - 0.5;
+    let temp;
+    if (item === "salad") {
+      temp = 0.5;
+    } else if (item === "chicken") {
+      temp = 0.7;
+    } else if (item === "cheese") {
+      temp = 0.4;
+    } else if (item === "meat") {
+      temp = 1.3;
+    }
+    let decrement = itemState - temp;
     decrement = Math.round(decrement * 100) / 100;
     if (decrement === 0) {
-      disableButtonHandler(disableButton, setDisableButton, "salad", "disable");
+      disableButtonHandler(disableButton, setDisableButton, item, "disable");
     }
-    setSalad(decrement);
+    setItem(decrement);
     // console.log(`DEBUGGING ${salad === 0} AND ${salad}`); This is showing async nature so i can't see the updated value!!
-    helperSaladPiece("remove");
+    helperItem("remove");
   };
 
+  // salad
   const helperSaladPiece = useCallback(
     (input) => {
       saladpiece(input, setSaladArr, saladArr);
@@ -77,36 +100,6 @@ const Homepage = (props) => {
   );
 
   // chicken
-  const handleAddChicken = () => {
-    console.log("chicken More Triggered");
-    let increment = chicken + 0.7;
-    increment = Math.round(increment * 100) / 100;
-    setChicken(increment);
-    helperChickenPiece("add");
-    disableButtonHandler(disableButton, setDisableButton, "chicken", "enable");
-  };
-
-  const handleRemoveChicken = () => {
-    console.log("chicken Less Triggered");
-
-    if (chicken === 0) {
-      return;
-    }
-    let decrement = chicken - 0.7;
-    decrement = Math.round(decrement * 100) / 100;
-    if (decrement === 0) {
-      disableButtonHandler(
-        disableButton,
-        setDisableButton,
-        "chicken",
-        "disable"
-      );
-    }
-    setChicken(decrement);
-    // console.log(`DEBUGGING ${chicken === 0} AND ${chicken}`); This is showing async nature so i can't see the updated value!!
-    helperChickenPiece("remove");
-  };
-
   const helperChickenPiece = useCallback(
     (input) => {
       chickenpiece(input, setChickenArr, chickenArr);
@@ -115,34 +108,6 @@ const Homepage = (props) => {
   );
 
   // cheese
-  const handleAddCheese = () => {
-    console.log("cheese More Triggered");
-    let increment = cheese + 0.4;
-    increment = Math.round(increment * 100) / 100;
-    setCheese(increment);
-    helperCheesePiece("add");
-    disableButtonHandler(disableButton, setDisableButton, "cheese", "enable");
-  };
-
-  const handleRemoveCheese = () => {
-    console.log("cheese Less Triggered");
-    if (cheese === 0) {
-      return;
-    }
-    let decrement = cheese - 0.4;
-    decrement = Math.round(decrement * 100) / 100;
-    if (decrement === 0) {
-      disableButtonHandler(
-        disableButton,
-        setDisableButton,
-        "cheese",
-        "disable"
-      );
-    }
-    setCheese(decrement);
-    helperCheesePiece("remove");
-  };
-
   const helperCheesePiece = useCallback(
     (input) => {
       cheesepiece(input, setCheeseArr, cheeseArr);
@@ -151,29 +116,6 @@ const Homepage = (props) => {
   );
 
   // meat
-  const handleAddMeat = () => {
-    console.log("meat More Triggered");
-    let increment = meat + 1.3;
-    increment = Math.round(increment * 100) / 100;
-    setMeat(increment);
-    helperMeatPiece("add");
-    disableButtonHandler(disableButton, setDisableButton, "meat", "enable");
-  };
-
-  const handleRemoveMeat = () => {
-    console.log("meat Less Triggered");
-    if (meat === 0) {
-      return;
-    }
-    let decrement = meat - 1.3;
-    decrement = Math.round(decrement * 100) / 100;
-    if (decrement === 0) {
-      disableButtonHandler(disableButton, setDisableButton, "meat", "disable");
-    }
-    setMeat(decrement);
-    helperMeatPiece("remove");
-  };
-
   const helperMeatPiece = useCallback(
     (input) => {
       meatpiece(input, setMeatArr, meatArr);
@@ -238,7 +180,6 @@ const Homepage = (props) => {
   }
 
   // return HTML
-
   return (
     <div>
       <BurgerDisplay
@@ -274,11 +215,18 @@ const Homepage = (props) => {
                   : "enable-button "
               } mx-2 px-3`}
               disabled={disableButton.includes("disablesalad")}
-              onClick={handleRemoveSalad}
+              onClick={() => {
+                handleRemove("salad", salad, setSalad, helperSaladPiece);
+              }}
             >
               Less
             </button>
-            <button className="add-button px-3" onClick={handleAddSalad}>
+            <button
+              className="add-button px-3"
+              onClick={() => {
+                handleAdd("salad", salad, setSalad, helperSaladPiece);
+              }}
+            >
               More
             </button>
           </div>
@@ -298,11 +246,23 @@ const Homepage = (props) => {
                   : "enable-button "
               } mx-2 px-3`}
               disabled={disableButton.includes("disablechicken")}
-              onClick={handleRemoveChicken}
+              onClick={() => {
+                handleRemove(
+                  "chicken",
+                  chicken,
+                  setChicken,
+                  helperChickenPiece
+                );
+              }}
             >
               Less
             </button>
-            <button className="add-button px-3" onClick={handleAddChicken}>
+            <button
+              className="add-button px-3"
+              onClick={() => {
+                handleAdd("chicken", chicken, setChicken, helperChickenPiece);
+              }}
+            >
               More
             </button>
           </div>
@@ -322,11 +282,18 @@ const Homepage = (props) => {
                   : "enable-button "
               } mx-2 px-3`}
               disabled={disableButton.includes("disablecheese")}
-              onClick={handleRemoveCheese}
+              onClick={() => {
+                handleRemove("cheese", cheese, setCheese, helperCheesePiece);
+              }}
             >
               Less
             </button>
-            <button className="add-button px-3" onClick={handleAddCheese}>
+            <button
+              className="add-button px-3"
+              onClick={() => {
+                handleAdd("cheese", cheese, setCheese, helperCheesePiece);
+              }}
+            >
               More
             </button>
           </div>
@@ -346,11 +313,18 @@ const Homepage = (props) => {
                   : "enable-button "
               } mx-2 px-3`}
               disabled={disableButton.includes("disablemeat")}
-              onClick={handleRemoveMeat}
+              onClick={() => {
+                handleRemove("meat", meat, setMeat, helperMeatPiece);
+              }}
             >
               Less
             </button>
-            <button className="add-button px-3" onClick={handleAddMeat}>
+            <button
+              className="add-button px-3"
+              onClick={() => {
+                handleAdd("meat", meat, setMeat, helperMeatPiece);
+              }}
+            >
               More
             </button>
           </div>
