@@ -14,7 +14,7 @@ const Popup = (props) => {
             color: "#944317",
           }}
           onClick={() => {
-            props.setPopUpvalue(false);
+            props.setPopUp(false);
           }}
         >
           <b>CANCEL</b>
@@ -26,7 +26,7 @@ const Popup = (props) => {
             color: "#5c9210",
           }}
           onClick={() => {
-            props.setPopUpvalue(false);
+            props.setPopUp(false);
             props.saveorder();
           }}
         >

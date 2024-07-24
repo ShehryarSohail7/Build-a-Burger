@@ -1,7 +1,7 @@
+import BurgerDisplay from "../components/burgerDisplay";
 import React, { useState, useCallback } from "react";
-import topbun from "../images/top_bun.png";
-import bottombun from "../images/bottom_bun.png";
 import Popup from "../components/popup";
+import "./css/homePage.css";
 import {
   saladpiece,
   chickenpiece,
@@ -28,13 +28,7 @@ const Homepage = (props) => {
   ]);
   const [popup, setPopUp] = useState(false);
 
-  // Setters
-  const setPopUpvalue = (value) => {
-    setPopUp(value);
-  };
-
   // function
-
   const saveorder = () => {
     if (localStorage.getItem(props.activeUser) === null) {
       localStorage.setItem(props.activeUser, JSON.stringify([]));
@@ -56,7 +50,6 @@ const Homepage = (props) => {
     increment = Math.round(increment * 100) / 100;
     setSalad(increment);
     helperSaladPiece("add");
-    // Disble Salad button;
     disableButtonHandler(disableButton, setDisableButton, "salad", "enable");
   };
 
@@ -69,7 +62,6 @@ const Homepage = (props) => {
     let decrement = salad - 0.5;
     decrement = Math.round(decrement * 100) / 100;
     if (decrement === 0) {
-      // setDisablebuttonsalad(true);
       disableButtonHandler(disableButton, setDisableButton, "salad", "disable");
     }
     setSalad(decrement);
@@ -91,7 +83,6 @@ const Homepage = (props) => {
     increment = Math.round(increment * 100) / 100;
     setChicken(increment);
     helperChickenPiece("add");
-    // setDisablebuttonchicken(false);
     disableButtonHandler(disableButton, setDisableButton, "chicken", "enable");
   };
 
@@ -104,7 +95,6 @@ const Homepage = (props) => {
     let decrement = chicken - 0.7;
     decrement = Math.round(decrement * 100) / 100;
     if (decrement === 0) {
-      // setDisablebuttonchicken(true);
       disableButtonHandler(
         disableButton,
         setDisableButton,
@@ -131,7 +121,6 @@ const Homepage = (props) => {
     increment = Math.round(increment * 100) / 100;
     setCheese(increment);
     helperCheesePiece("add");
-    // setDisablebuttoncheese(false);
     disableButtonHandler(disableButton, setDisableButton, "cheese", "enable");
   };
 
@@ -143,7 +132,6 @@ const Homepage = (props) => {
     let decrement = cheese - 0.4;
     decrement = Math.round(decrement * 100) / 100;
     if (decrement === 0) {
-      // setDisablebuttoncheese(true);
       disableButtonHandler(
         disableButton,
         setDisableButton,
@@ -169,7 +157,6 @@ const Homepage = (props) => {
     increment = Math.round(increment * 100) / 100;
     setMeat(increment);
     helperMeatPiece("add");
-    // setDisablebuttonmeat(false);
     disableButtonHandler(disableButton, setDisableButton, "meat", "enable");
   };
 
@@ -181,7 +168,6 @@ const Homepage = (props) => {
     let decrement = meat - 1.3;
     decrement = Math.round(decrement * 100) / 100;
     if (decrement === 0) {
-      // setDisablebuttonmeat(true);
       disableButtonHandler(disableButton, setDisableButton, "meat", "disable");
     }
     setMeat(decrement);
@@ -195,24 +181,7 @@ const Homepage = (props) => {
     [meatArr]
   );
 
-  const handleButton = (flag) => {
-    if (flag) {
-      return {
-        backgroundColor: "#ac9980",
-        color: "#ccc",
-        border: "1px solid #7e7365",
-      };
-    } else if (!flag) {
-      return {
-        backgroundColor: "#d39952",
-        color: "#fff",
-        border: "1px solid #aa6817",
-      };
-    }
-  };
-
   // Order Button
-
   function OrderButtonManipulation(props) {
     let elementsToFind = [
       "disablesalad",
@@ -221,13 +190,7 @@ const Homepage = (props) => {
       "disablemeat",
     ];
     if (props.type === "order") {
-      if (
-        // disablebuttonchicken &&
-        // disablebuttoncheese &&
-        // disablebuttonsalad &&
-        // disablebuttonmeat
-        elementsToFind.every((element) => disableButton.includes(element))
-      ) {
+      if (elementsToFind.every((element) => disableButton.includes(element))) {
         return (
           <button
             className="px-4 py-3 my-2"
@@ -278,30 +241,16 @@ const Homepage = (props) => {
 
   return (
     <div>
-      <div className="d-flex justify-content-center">
-        <div
-          className=" col-4 d-flex flex-column align-items-center mt-3"
-          style={{ overflow: "scroll", height: "500px", width: "650px" }}
-        >
-          <img src={topbun} alt="top bun" style={{ height: "115px" }} />
-
-          {/* <p>Please select ingredients.</p> */}
-          {4.0 + salad + chicken + cheese + meat === 4.0 ? (
-            <b>
-              <p>Please select ingredients.</p>
-            </b>
-          ) : (
-            <div></div>
-          )}
-          {/* <img src={saladimage} alt="salad piece" style={{ width: "530px" }} /> */}
-          {saladArr}
-          {chickenArr}
-          {cheeseArr}
-          {meatArr}
-
-          <img src={bottombun} alt="bottom bun" style={{ height: "79px" }} />
-        </div>
-      </div>
+      <BurgerDisplay
+        salad={salad}
+        saladArr={saladArr}
+        meat={meat}
+        meatArr={meatArr}
+        chicken={chicken}
+        chickenArr={chickenArr}
+        cheese={cheese}
+        cheeseArr={cheeseArr}
+      />
       <div
         className="d-flex flex-column align-items-center"
         style={{ backgroundColor: "#cf8f2e" }}
@@ -319,22 +268,17 @@ const Homepage = (props) => {
           </p>
           <div>
             <button
-              className="mx-2 px-3"
-              style={handleButton(disableButton.includes("disablesalad"))}
+              className={`${
+                disableButton.includes("disablesalad")
+                  ? "disable-button "
+                  : "enable-button "
+              } mx-2 px-3`}
               disabled={disableButton.includes("disablesalad")}
               onClick={handleRemoveSalad}
             >
               Less
             </button>
-            <button
-              className="px-3"
-              style={{
-                backgroundColor: "#8f5e1e",
-                color: "#fff",
-                border: "1px solid #8f5e1e",
-              }}
-              onClick={handleAddSalad}
-            >
+            <button className="add-button px-3" onClick={handleAddSalad}>
               More
             </button>
           </div>
@@ -348,22 +292,17 @@ const Homepage = (props) => {
           </p>
           <div>
             <button
-              className="mx-2 px-3"
-              style={handleButton(disableButton.includes("disablechicken"))}
+              className={`${
+                disableButton.includes("disablechicken")
+                  ? "disable-button "
+                  : "enable-button "
+              } mx-2 px-3`}
               disabled={disableButton.includes("disablechicken")}
               onClick={handleRemoveChicken}
             >
               Less
             </button>
-            <button
-              className="px-3"
-              style={{
-                backgroundColor: "#8f5e1e",
-                color: "#fff",
-                border: "1px solid #8f5e1e",
-              }}
-              onClick={handleAddChicken}
-            >
+            <button className="add-button px-3" onClick={handleAddChicken}>
               More
             </button>
           </div>
@@ -377,22 +316,17 @@ const Homepage = (props) => {
           </p>
           <div>
             <button
-              className="mx-2 px-3"
-              style={handleButton(disableButton.includes("disablecheese"))}
+              className={`${
+                disableButton.includes("disablecheese")
+                  ? "disable-button "
+                  : "enable-button "
+              } mx-2 px-3`}
               disabled={disableButton.includes("disablecheese")}
               onClick={handleRemoveCheese}
             >
               Less
             </button>
-            <button
-              className="px-3"
-              style={{
-                backgroundColor: "#8f5e1e",
-                color: "#fff",
-                border: "1px solid #8f5e1e",
-              }}
-              onClick={handleAddCheese}
-            >
+            <button className="add-button px-3" onClick={handleAddCheese}>
               More
             </button>
           </div>
@@ -406,22 +340,17 @@ const Homepage = (props) => {
           </p>
           <div>
             <button
-              className="mx-2 px-3"
-              style={handleButton(disableButton.includes("disablemeat"))}
+              className={`${
+                disableButton.includes("disablemeat")
+                  ? "disable-button "
+                  : "enable-button "
+              } mx-2 px-3`}
               disabled={disableButton.includes("disablemeat")}
               onClick={handleRemoveMeat}
             >
               Less
             </button>
-            <button
-              className="px-3"
-              style={{
-                backgroundColor: "#8f5e1e",
-                color: "#fff",
-                border: "1px solid #8f5e1e",
-              }}
-              onClick={handleAddMeat}
-            >
+            <button className="add-button px-3" onClick={handleAddMeat}>
               More
             </button>
           </div>
@@ -430,11 +359,7 @@ const Homepage = (props) => {
           type={props.activeUser === null ? "signIn" : "order"}
         />
       </div>
-      <Popup
-        trigger={popup}
-        setPopUpvalue={setPopUpvalue}
-        saveorder={saveorder}
-      >
+      <Popup trigger={popup} setPopUp={setPopUp} saveorder={saveorder}>
         <div className="pt-3" style={{ fontFamily: "Open Sans, sans-serif" }}>
           <p
             style={{
@@ -446,10 +371,12 @@ const Homepage = (props) => {
           <div style={{ fontSize: "13px" }}>
             <p>A delicious burger with the following ingredients:</p>
             <ul>
-              <li>salad: {Math.round((salad / 0.5) * 100) / 100}</li>
-              <li>chicken: {Math.round((chicken / 0.7) * 100) / 100}</li>
-              <li>cheese: {Math.round((cheese / 0.4) * 100) / 100}</li>
-              <li>meat: {Math.round((meat / 1.3) * 100) / 100}</li>
+              <li key={1}>salad: {Math.round((salad / 0.5) * 100) / 100}</li>
+              <li key={2}>
+                chicken: {Math.round((chicken / 0.7) * 100) / 100}
+              </li>
+              <li key={3}>cheese: {Math.round((cheese / 0.4) * 100) / 100}</li>
+              <li key={4}>meat: {Math.round((meat / 1.3) * 100) / 100}</li>
             </ul>
             <p>$ {(4.0 + salad + chicken + cheese + meat).toFixed(2)}</p>
             <p>Continue to checkout?</p>
