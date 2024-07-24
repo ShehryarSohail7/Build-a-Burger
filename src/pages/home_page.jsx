@@ -23,6 +23,8 @@ const Home_page = (props) => {
   const [disable_button_Meat, Set_disable_button_Meat] = useState(true);
   const [popup, Set_popup] = useState(false);
 
+  let temp;
+
   // Setters
   const Set_popup_value = (value) => {
     Set_popup(value);
