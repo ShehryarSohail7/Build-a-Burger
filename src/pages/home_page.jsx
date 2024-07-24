@@ -7,6 +7,7 @@ import {
   chickenpiece,
   cheesepiece,
   meatpiece,
+  disableButtonHandler,
 } from "./helpers/HomePageHelper";
 
 const Homepage = (props) => {
@@ -19,10 +20,12 @@ const Homepage = (props) => {
   const [cheeseArr, setCheeseArr] = useState([]);
   const [meat, setMeat] = useState(0);
   const [meatArr, setMeatArr] = useState([]);
-  const [disablebuttonsalad, setDisablebuttonsalad] = useState(true);
-  const [disablebuttonchicken, setDisablebuttonchicken] = useState(true);
-  const [disablebuttoncheese, setDisablebuttoncheese] = useState(true);
-  const [disablebuttonmeat, setDisablebuttonmeat] = useState(true);
+  const [disableButton, setDisableButton] = useState([
+    "disablesalad",
+    "disablechicken",
+    "disablecheese",
+    "disablemeat",
+  ]);
   const [popup, setPopUp] = useState(false);
 
   // Setters
@@ -53,7 +56,8 @@ const Homepage = (props) => {
     increment = Math.round(increment * 100) / 100;
     setSalad(increment);
     helperSaladPiece("add");
-    setDisablebuttonsalad(false);
+    // Disble Salad button;
+    disableButtonHandler(disableButton, setDisableButton, "salad", "enable");
   };
 
   const handleRemoveSalad = () => {
@@ -65,7 +69,8 @@ const Homepage = (props) => {
     let decrement = salad - 0.5;
     decrement = Math.round(decrement * 100) / 100;
     if (decrement === 0) {
-      setDisablebuttonsalad(true);
+      // setDisablebuttonsalad(true);
+      disableButtonHandler(disableButton, setDisableButton, "salad", "disable");
     }
     setSalad(decrement);
     // console.log(`DEBUGGING ${salad === 0} AND ${salad}`); This is showing async nature so i can't see the updated value!!
@@ -86,7 +91,8 @@ const Homepage = (props) => {
     increment = Math.round(increment * 100) / 100;
     setChicken(increment);
     helperChickenPiece("add");
-    setDisablebuttonchicken(false);
+    // setDisablebuttonchicken(false);
+    disableButtonHandler(disableButton, setDisableButton, "chicken", "enable");
   };
 
   const handleRemoveChicken = () => {
@@ -98,7 +104,13 @@ const Homepage = (props) => {
     let decrement = chicken - 0.7;
     decrement = Math.round(decrement * 100) / 100;
     if (decrement === 0) {
-      setDisablebuttonchicken(true);
+      // setDisablebuttonchicken(true);
+      disableButtonHandler(
+        disableButton,
+        setDisableButton,
+        "chicken",
+        "disable"
+      );
     }
     setChicken(decrement);
     // console.log(`DEBUGGING ${chicken === 0} AND ${chicken}`); This is showing async nature so i can't see the updated value!!
@@ -119,7 +131,8 @@ const Homepage = (props) => {
     increment = Math.round(increment * 100) / 100;
     setCheese(increment);
     helperCheesePiece("add");
-    setDisablebuttoncheese(false);
+    // setDisablebuttoncheese(false);
+    disableButtonHandler(disableButton, setDisableButton, "cheese", "enable");
   };
 
   const handleRemoveCheese = () => {
@@ -130,7 +143,13 @@ const Homepage = (props) => {
     let decrement = cheese - 0.4;
     decrement = Math.round(decrement * 100) / 100;
     if (decrement === 0) {
-      setDisablebuttoncheese(true);
+      // setDisablebuttoncheese(true);
+      disableButtonHandler(
+        disableButton,
+        setDisableButton,
+        "cheese",
+        "disable"
+      );
     }
     setCheese(decrement);
     helperCheesePiece("remove");
@@ -150,7 +169,8 @@ const Homepage = (props) => {
     increment = Math.round(increment * 100) / 100;
     setMeat(increment);
     helperMeatPiece("add");
-    setDisablebuttonmeat(false);
+    // setDisablebuttonmeat(false);
+    disableButtonHandler(disableButton, setDisableButton, "meat", "enable");
   };
 
   const handleRemoveMeat = () => {
@@ -161,7 +181,8 @@ const Homepage = (props) => {
     let decrement = meat - 1.3;
     decrement = Math.round(decrement * 100) / 100;
     if (decrement === 0) {
-      setDisablebuttonmeat(true);
+      // setDisablebuttonmeat(true);
+      disableButtonHandler(disableButton, setDisableButton, "meat", "disable");
     }
     setMeat(decrement);
     helperMeatPiece("remove");
@@ -193,12 +214,19 @@ const Homepage = (props) => {
   // Order Button
 
   function OrderButtonManipulation(props) {
+    let elementsToFind = [
+      "disablesalad",
+      "disablechicken",
+      "disablecheese",
+      "disablemeat",
+    ];
     if (props.type === "order") {
       if (
-        disablebuttonchicken &&
-        disablebuttoncheese &&
-        disablebuttonsalad &&
-        disablebuttonmeat
+        // disablebuttonchicken &&
+        // disablebuttoncheese &&
+        // disablebuttonsalad &&
+        // disablebuttonmeat
+        elementsToFind.every((element) => disableButton.includes(element))
       ) {
         return (
           <button
@@ -292,8 +320,8 @@ const Homepage = (props) => {
           <div>
             <button
               className="mx-2 px-3"
-              style={handleButton(disablebuttonsalad)}
-              disabled={disablebuttonsalad}
+              style={handleButton(disableButton.includes("disablesalad"))}
+              disabled={disableButton.includes("disablesalad")}
               onClick={handleRemoveSalad}
             >
               Less
@@ -321,8 +349,8 @@ const Homepage = (props) => {
           <div>
             <button
               className="mx-2 px-3"
-              style={handleButton(disablebuttonchicken)}
-              disabled={disablebuttonchicken}
+              style={handleButton(disableButton.includes("disablechicken"))}
+              disabled={disableButton.includes("disablechicken")}
               onClick={handleRemoveChicken}
             >
               Less
@@ -350,8 +378,8 @@ const Homepage = (props) => {
           <div>
             <button
               className="mx-2 px-3"
-              style={handleButton(disablebuttoncheese)}
-              disabled={disablebuttoncheese}
+              style={handleButton(disableButton.includes("disablecheese"))}
+              disabled={disableButton.includes("disablecheese")}
               onClick={handleRemoveCheese}
             >
               Less
@@ -379,8 +407,8 @@ const Homepage = (props) => {
           <div>
             <button
               className="mx-2 px-3"
-              style={handleButton(disablebuttonmeat)}
-              disabled={disablebuttonmeat}
+              style={handleButton(disableButton.includes("disablemeat"))}
+              disabled={disableButton.includes("disablemeat")}
               onClick={handleRemoveMeat}
             >
               Less

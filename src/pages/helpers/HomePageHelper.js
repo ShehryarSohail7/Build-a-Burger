@@ -64,4 +64,27 @@ const meatpiece = (input, setMeatArr, meatArr) => {
   }
 };
 
-export { saladpiece, chickenpiece, cheesepiece, meatpiece };
+const disableButtonHandler = (
+  disableButtonArr,
+  setDisableButtonArr,
+  item,
+  action
+) => {
+  let ingredients_position = ["salad", "chicken", "cheese", "meat"];
+  let extractArray = disableButtonArr;
+  let index = ingredients_position.indexOf(item);
+  if (action === "enable" && index !== -1) {
+    extractArray[index] = action + item;
+  } else if (action === "disable" && index !== -1) {
+    extractArray[index] = action + item;
+  }
+  setDisableButtonArr(extractArray);
+};
+
+export {
+  saladpiece,
+  chickenpiece,
+  cheesepiece,
+  meatpiece,
+  disableButtonHandler,
+};
