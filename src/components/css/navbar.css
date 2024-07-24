@@ -1,0 +1,13 @@
+.custom-link {
+  padding-top: 16px;
+  padding-bottom: 11px;
+  font-family: Arial;
+  font-size: 14px;
+}
+
+.custom-link:hover,
+.custom-link:active,
+.custom-link.link-click {
+  background-color: #8f5c2c;
+  border-bottom: 4px solid #40a4c8;
+}
