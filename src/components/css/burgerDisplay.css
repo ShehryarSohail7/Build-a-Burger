@@ -12,7 +12,57 @@
   height: 79px;
 }
 
-/* @media (max-width: 768px) {
+.meat-image {
+  width: 530px;
+}
+
+.cheese-image {
+  width: 530px;
+}
+
+.chicken-image {
+  width: 530px;
+}
+
+.salad-image {
+  width: 530px;
+}
+
+@media (max-width: 768px) {
   .burger-div {
+    overflow: scroll;
+    height: 500px;
+    width: auto;
+    height: 380px;
+
+    p {
+      text-align: center;
+    }
   }
-} */
+
+  .top-bun {
+    height: auto;
+    width: 100%;
+  }
+
+  .bottom-bun {
+    height: auto;
+    width: 97%;
+  }
+
+  .meat-image {
+    width: 420px;
+  }
+
+  .cheese-image {
+    width: 420px;
+  }
+
+  .chicken-image {
+    width: 420px;
+  }
+
+  .salad-image {
+    width: 420px;
+  }
+}

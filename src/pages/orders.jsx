@@ -45,7 +45,7 @@ const Orders = (props) => {
         ordersArray.push(
           <div
             id="Items"
-            className="col-9 my-2"
+            className="col-11 col-md-9 my-2"
             style={{
               border: "1px solid #eee",
               boxShadow: "0 2px 3px #ccc",
