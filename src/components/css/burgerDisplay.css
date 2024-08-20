@@ -1,0 +1,18 @@
+.burger-div {
+  overflow: scroll;
+  height: 500px;
+  width: 650px;
+}
+
+.top-bun {
+  height: 115px;
+}
+
+.bottom-bun {
+  height: 79px;
+}
+
+/* @media (max-width: 768px) {
+  .burger-div {
+  }
+} */
