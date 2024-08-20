@@ -97,12 +97,12 @@ const LogIn_signUp = (props) => {
           <input
             type="email"
             placeholder="E-mail"
-            className="mt-3 mx-3"
+            className="email mt-3 mx-3"
             value={email}
             onChange={(e) => {
               Setemail(e.target.value);
             }}
-            style={{ width: "370px", border: "1px solid #ccc" }}
+            style={{ border: "1px solid #ccc" }}
           />
           <input
             type="text"

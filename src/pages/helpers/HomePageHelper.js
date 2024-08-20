@@ -9,7 +9,7 @@ const saladpiece = (input, setSaladArr, saladArr) => {
     console.log("salad piece added");
     setSaladArr([
       ...saladArr,
-      <img src={saladimage} alt="salad piece" style={{ width: "530px" }} />,
+      <img className="salad-image" src={saladimage} alt="salad piece" />,
     ]);
   } else if (input === "remove") {
     console.log("salad piece removed");
@@ -24,7 +24,7 @@ const chickenpiece = (input, setChickenArr, chickenArr) => {
     console.log("chicken piece added");
     setChickenArr([
       ...chickenArr,
-      <img src={chickenimage} alt="chicken piece" style={{ width: "530px" }} />,
+      <img className="chicken-image" src={chickenimage} alt="chicken piece" />,
     ]);
   } else if (input === "remove") {
     console.log("chicken piece removed");
@@ -39,7 +39,7 @@ const cheesepiece = (input, setCheeseArr, cheeseArr) => {
     console.log("cheese piece added");
     setCheeseArr([
       ...cheeseArr,
-      <img src={cheeseimage} alt="cheese piece" style={{ width: "530px" }} />,
+      <img className="cheese-image" src={cheeseimage} alt="cheese piece" />,
     ]);
   } else if (input === "remove") {
     console.log("cheese piece removed");
@@ -54,7 +54,7 @@ const meatpiece = (input, setMeatArr, meatArr) => {
     console.log("meat piece added");
     setMeatArr([
       ...meatArr,
-      <img src={meatimage} alt="meat piece" style={{ width: "530px" }} />,
+      <img className="meat-image" src={meatimage} alt="meat piece" />,
     ]);
   } else if (input === "remove") {
     console.log("meat piece removed");
