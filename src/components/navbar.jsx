@@ -1,17 +1,18 @@
 import React, { useState } from "react";
 import logo from "../images/logo.png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import "../components/css/navbar.css";
 
 const Navbar = (props) => {
   // Use States
-  const [active, setActive] = useState("");
+  const current_location = useLocation();
+  const navigate = useNavigate();
+  console.log("current location", current_location.pathname);
 
   // Functions
-
-  const navigate = useNavigate();
   const Handle_Logout = () => {
     props.userSetter(null); // making the active user null because we are logging out
+    console.log("logging out");
     navigate("/");
   };
 
@@ -32,43 +33,40 @@ const Navbar = (props) => {
       <div className="mx-4">
         <Link
           className={`custom-link ${
-            active === "builder" ? "link-click" : ""
+            current_location.pathname === "/" ? "link-click" : ""
           } px-2 text-white text-decoration-none`}
           to="/"
-          onClick={() => setActive("builder")}
         >
           Burger Builder
         </Link>
         <Link
           className={`custom-link ${
-            active === "signin" ? "link-click" : ""
+            current_location.pathname === "/login" ? "link-click" : ""
           } px-2 text-white text-decoration-none d-${
             props.activeUser === null ? "display" : "none"
           }`}
           to="/login"
-          onClick={() => setActive("signin")}
         >
           Sign In
         </Link>
         <Link
           className={`custom-link ${
-            active === "order" ? "link-click" : ""
+            current_location.pathname === "/orders" ? "link-click" : ""
           } px-2 text-white text-decoration-none d-${
             props.activeUser === null ? "none" : "display"
           }`}
           to="/orders"
-          onClick={() => setActive("order")}
         >
           Orders
         </Link>
-        <Link
-          className={`custom-link px-2 text-white text-decoration-none  d-${
+        <div
+          className={`custom-link px-2 text-white text-decoration-none d-inline d-${
             props.activeUser === null ? "none" : "display"
           }`}
           onClick={Handle_Logout}
         >
           Log Out
-        </Link>
+        </div>
       </div>
     </nav>
   );

@@ -51,18 +51,18 @@
   }
 
   .meat-image {
-    width: 420px;
+    width: 100%;
   }
 
   .cheese-image {
-    width: 420px;
+    width: 100%;
   }
 
   .chicken-image {
-    width: 420px;
+    width: 100%;
   }
 
   .salad-image {
-    width: 420px;
+    width: 100%;
   }
 }

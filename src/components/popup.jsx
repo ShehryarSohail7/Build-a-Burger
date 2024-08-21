@@ -2,7 +2,6 @@ import React from "react";
 import "./css/popup.css";
 
 const Popup = (props) => {
-  console.log("popup tiggered");
   return props.trigger ? (
     <div className="popup">
       <div className="popup-inner">
