@@ -178,7 +178,7 @@ const Homepage = (props) => {
 
   // return HTML
   return (
-    <div className="d-flex flex-column justify-content-around">
+    <div className="home-page-container d-flex flex-column justify-content-around">
       <BurgerDisplay
         salad={salad}
         saladArr={saladArr}

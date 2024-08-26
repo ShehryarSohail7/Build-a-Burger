@@ -15,3 +15,9 @@
   color: #fff;
   border: 1px solid #8f5e1e;
 }
+
+@media (max-width: 768px) {
+  .home-page-container{
+    height: 93%;
+  }
+}

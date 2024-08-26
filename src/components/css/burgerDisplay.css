@@ -32,7 +32,7 @@
   .burger-div {
     overflow: scroll;
     width: auto;
-    height: auto;
+    height: 380px;
 
     p {
       text-align: center;
@@ -63,5 +63,17 @@
 
   .salad-image {
     width: 100%;
+  }
+}
+
+@media (max-height: 667px) {
+  .burger-div {
+    overflow: scroll;
+    width: auto;
+    height: 295px;
+
+    p {
+      text-align: center;
+    }
   }
 }
