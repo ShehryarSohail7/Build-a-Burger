@@ -33,13 +33,9 @@ const LogIn_signUp = (props) => {
   };
 
   const SignUpHandler = () => {
-    console.log(email);
-    console.log(password);
-
     let users = JSON.parse(localStorage.getItem("users"));
     for (let user of users) {
       if (user.email === email) {
-        console.log("User already exists");
         SetWarningDisplay("display");
         Setwarning("EMAIL_EXISTS");
         return;
@@ -47,9 +43,9 @@ const LogIn_signUp = (props) => {
     }
     users.push({ email: email, password: password });
     localStorage.setItem("users", JSON.stringify(users));
-    console.log(`New user ${email} added`);
     SetWarningDisplay("none");
     props.userSetter(email);
+    localStorage.setItem("activeUser", email); // updating the local storage for previous session user
     navigate("/");
   };
 
@@ -58,9 +54,10 @@ const LogIn_signUp = (props) => {
     for (let user of data) {
       if (user.email === email) {
         if (user.password === password) {
-          console.log("Log in successful");
           SetWarningDisplay("none");
           props.userSetter(user.email);
+          localStorage.setItem("activeUser", user.email);  // updating the local storage for previous session user
+          
 
           navigate("/");
           return;

@@ -31,9 +31,8 @@
 @media (max-width: 768px) {
   .burger-div {
     overflow: scroll;
-    height: 500px;
     width: auto;
-    height: 380px;
+    height: auto;
 
     p {
       text-align: center;

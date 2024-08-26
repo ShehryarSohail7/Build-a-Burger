@@ -23,11 +23,9 @@ const Orders = (props) => {
       let meat2;
       let chicken2;
       let cheese2;
-      console.log("user items are:", user_items);
       let ordersArray = [];
 
       for (let i = 0; i < user_items.length; i++) {
-        console.log("user items are:", user_items[i]);
         salad = user_items[i].salad;
         meat = user_items[i].meat;
         chicken = user_items[i].chicken;

@@ -6,13 +6,11 @@ import meatimage from "../../images/meat.png";
 
 const saladpiece = (input, setSaladArr, saladArr) => {
   if (input === "add") {
-    console.log("salad piece added");
     setSaladArr([
       ...saladArr,
       <img className="salad-image" src={saladimage} alt="salad piece" />,
     ]);
   } else if (input === "remove") {
-    console.log("salad piece removed");
     let saladTemp = saladArr;
     saladTemp.pop();
     setSaladArr([...saladTemp]);
@@ -21,13 +19,11 @@ const saladpiece = (input, setSaladArr, saladArr) => {
 
 const chickenpiece = (input, setChickenArr, chickenArr) => {
   if (input === "add") {
-    console.log("chicken piece added");
     setChickenArr([
       ...chickenArr,
       <img className="chicken-image" src={chickenimage} alt="chicken piece" />,
     ]);
   } else if (input === "remove") {
-    console.log("chicken piece removed");
     let chickenTemp = chickenArr;
     chickenTemp.pop();
     setChickenArr([...chickenTemp]);
@@ -36,13 +32,11 @@ const chickenpiece = (input, setChickenArr, chickenArr) => {
 
 const cheesepiece = (input, setCheeseArr, cheeseArr) => {
   if (input === "add") {
-    console.log("cheese piece added");
     setCheeseArr([
       ...cheeseArr,
       <img className="cheese-image" src={cheeseimage} alt="cheese piece" />,
     ]);
   } else if (input === "remove") {
-    console.log("cheese piece removed");
     let cheeseTemp = cheeseArr;
     cheeseTemp.pop();
     setCheeseArr([...cheeseTemp]);
@@ -51,13 +45,11 @@ const cheesepiece = (input, setCheeseArr, cheeseArr) => {
 
 const meatpiece = (input, setMeatArr, meatArr) => {
   if (input === "add") {
-    console.log("meat piece added");
     setMeatArr([
       ...meatArr,
       <img className="meat-image" src={meatimage} alt="meat piece" />,
     ]);
   } else if (input === "remove") {
-    console.log("meat piece removed");
     let meatTemp = meatArr;
     meatTemp.pop();
     setMeatArr([...meatTemp]);

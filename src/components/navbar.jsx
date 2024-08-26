@@ -7,11 +7,11 @@ const Navbar = (props) => {
   // Use States
   const current_location = useLocation();
   const navigate = useNavigate();
-  console.log("current location", current_location.pathname);
 
   // Functions
   const Handle_Logout = () => {
     props.userSetter(null); // making the active user null because we are logging out
+    localStorage.setItem("activeUser", null); // updating the local storage for previous session user
     console.log("logging out");
     navigate("/");
   };

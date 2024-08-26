@@ -46,7 +46,6 @@ const Homepage = (props) => {
   // handlers
 
   const handleAdd = (item, itemState, setItem, helperItem) => {
-    console.log(`${item} More Triggered`);
     let temp;
     if (item === "salad") {
       temp = 0.5;
@@ -66,7 +65,6 @@ const Homepage = (props) => {
   };
 
   const handleRemove = (item, itemState, setItem, helperItem) => {
-    console.log(`${item} Less Triggered`);
 
     if (item === 0) {
       return;
@@ -87,7 +85,6 @@ const Homepage = (props) => {
       disableButtonHandler(disableButton, setDisableButton, item, "disable");
     }
     setItem(decrement);
-    // console.log(`DEBUGGING ${salad === 0} AND ${salad}`); This is showing async nature so i can't see the updated value!!
     helperItem("remove");
   };
 
@@ -181,7 +178,7 @@ const Homepage = (props) => {
 
   // return HTML
   return (
-    <div>
+    <div className="d-flex flex-column justify-content-around">
       <BurgerDisplay
         salad={salad}
         saladArr={saladArr}
